@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
 
-pin = 16
+pin = 23
 
 GPIO.setup(pin, GPIO.OUT)
 
