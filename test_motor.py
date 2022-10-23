@@ -4,11 +4,11 @@ import RPi.GPIO as GPIO
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
 
-pin = 16
+pin = 23
 
 GPIO.setup(pin, GPIO.OUT)
 
-GPIO.output(pin,True)
+GPIO.output(pin,GPIO.HIGH)
 
 while True:
     try:
@@ -16,3 +16,4 @@ while True:
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
+        break
