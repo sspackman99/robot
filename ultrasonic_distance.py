@@ -1,4 +1,5 @@
 #Libraries
+from re import M
 import RPi.GPIO as GPIO
 import time
  
@@ -6,12 +7,14 @@ import time
 GPIO.setmode(GPIO.BCM)
  
 #set GPIO Pins
-GPIO_TRIGGER = 18
-GPIO_ECHO = 24
+GPIO_TRIGGER = 16
+GPIO_ECHO = 12
+MOTOR_PIN = 23
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
+GPIO.setup(MOTOR_PIN, GPIO.OUT)
  
 def distance():
     # set Trigger to HIGH
@@ -47,7 +50,10 @@ if __name__ == '__main__':
             print ("Measured Distance = %.1f cm" % dist)
             if dist < 10:
                 print("Turn left now")
-            time.sleep(.1)
+                GPIO.output(MOTOR_PIN, GPIO.LOW)
+            else:
+                GPIO.output(MOTOR_PIN, GPIO.HIGH)
+            time.sleep(.05)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
