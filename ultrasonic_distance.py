@@ -36,6 +36,10 @@ MOTOR3 = Motor(20,26)
 MOTOR4 = Motor(13,19)
 
 motors = [MOTOR1, MOTOR2, MOTOR3, MOTOR4]
+
+left_motors = [MOTOR1, MOTOR3]
+
+right_motors = [MOTOR2, MOTOR4]
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -80,6 +84,18 @@ def all_backward():
 def all_stop():
     for motor in motors:
         motor.stop()
+
+def turn_left():
+    for motor in left_motors:
+        motor.backward()
+    for motor in right_motors:
+        motor.forward()
+
+def turn_right():
+    for motor in left_motors:
+        motor.forward()
+    for motor in right_motors:
+        motor.backward()
  
 if __name__ == '__main__':
     try:
@@ -87,8 +103,8 @@ if __name__ == '__main__':
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
             if dist < 10:
-                print("stopping")
-                all_stop()
+                print("turning left")
+                turn_left()
             else:
                 all_forward()
             time.sleep(.05)
