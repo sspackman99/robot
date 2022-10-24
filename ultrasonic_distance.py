@@ -2,6 +2,27 @@
 from re import M
 import RPi.GPIO as GPIO
 import time
+
+#Create motor class
+
+class Motor:
+    def __init__(self,pin1,pin2):
+        self.pin1 = pin1
+        self.pin2 = pin2
+        GPIO.setup(pin1, GPIO.OUT)
+        GPIO.setup(pin2, GPIO.OUT)
+        GPIO.output(pin1, GPIO.LOW)
+        GPIO.output(pin2, GPIO.LOW)
+    def forward(self):
+        GPIO.output(self.pin1, GPIO.HIGH)
+        GPIO.output(self.pin2, GPIO.LOW)
+    def backward(self):
+        GPIO.output(self.pin2, GPIO.HIGH)
+        GPIO.output(self.pin1, GPIO.LOW)
+    def stop(self):
+        GPIO.output(self.pin2, GPIO.LOW)
+        GPIO.output(self.pin1, GPIO.LOW)
+        
  
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
@@ -9,12 +30,17 @@ GPIO.setmode(GPIO.BCM)
 #set GPIO Pins
 GPIO_TRIGGER = 16
 GPIO_ECHO = 12
-MOTOR_PIN = 23
+MOTOR1 = Motor(23,24)
+MOTOR2 = Motor(17,18)
+MOTOR3 = Motor(26,20)
+MOTOR4 = Motor(19,13)
+
+motors = [MOTOR1, MOTOR2, MOTOR3, MOTOR4]
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
-GPIO.setup(MOTOR_PIN, GPIO.OUT)
+
  
 def distance():
     # set Trigger to HIGH
@@ -42,6 +68,18 @@ def distance():
     distance = (TimeElapsed * 34300) / 2
  
     return distance
+
+def all_forward():
+    for motor in motors:
+        motor.forward()
+
+def all_backward():
+    for motor in motors:
+        motor.backward()
+
+def all_stop():
+    for motor in motors:
+        motor.stop()
  
 if __name__ == '__main__':
     try:
@@ -49,13 +87,14 @@ if __name__ == '__main__':
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
             if dist < 10:
-                print("Turn left now")
-                GPIO.output(MOTOR_PIN, GPIO.LOW)
+                print("stopping")
+                all_stop()
             else:
-                GPIO.output(MOTOR_PIN, GPIO.HIGH)
+                all_forward()
             time.sleep(.05)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
+
