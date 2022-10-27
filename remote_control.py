@@ -95,8 +95,9 @@ while 1 < 10:
 
         # window close event
         if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+            if event.key == K_q:
+                pygame.quit()
+                sys.exit()
 
         if event.type == KEYDOWN:
             # forward
