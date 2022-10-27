@@ -86,7 +86,7 @@ reverse = False
 go_left = False
 go_right = False
 
-try: 
+# try: 
 ## pygame main loop
     while True:
 
@@ -98,6 +98,7 @@ try:
                 #if event.key == K_q:
                 print('quitting')
                 pygame.quit()
+                GPIO.cleanup()
                 sys.exit()
 
             if event.type == KEYDOWN:
@@ -136,9 +137,9 @@ try:
                 turn_right()
 
             pygame.display.update()
-except KeyboardInterrupt:
-        print("remote control stopped by User")
-        GPIO.cleanup()
+# except KeyboardInterrupt:
+#         print("remote control stopped by User")
+#         GPIO.cleanup()
 
             
 
