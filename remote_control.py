@@ -1,8 +1,7 @@
 from re import M
 import RPi.GPIO as GPIO
-import pygame
+import pygame, sys
 from pygame.locals import *
-import sys
 import time
 
 pygame.init()
@@ -89,17 +88,17 @@ go_right = False
 
 try: 
 ## pygame main loop
-    while 1 < 10:
+    while True:
 
         # event checker
         for event in pygame.event.get():
 
             # window close event
             if event.type == QUIT:
-                if event.key == K_q:
-                    print('quitting')
-                    pygame.quit()
-                    sys.exit()
+                #if event.key == K_q:
+                print('quitting')
+                pygame.quit()
+                sys.exit()
 
             if event.type == KEYDOWN:
                 # forward
@@ -136,7 +135,7 @@ try:
                 print('going right')
                 turn_right()
 
-            #pygame.display.update()
+            pygame.display.update()
 except KeyboardInterrupt:
         print("remote control stopped by User")
         GPIO.cleanup()
