@@ -5,16 +5,16 @@ GPIO.setmode(GPIO.BCM)
 
 
 
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(5, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
 
 try:
     while 1 < 10:
-        GPIO.output(17, GPIO.HIGH)
-        GPIO.output(18, GPIO.LOW)
+        GPIO.output(5, GPIO.HIGH)
+        GPIO.output(6, GPIO.LOW)
         time.sleep(1)
-        GPIO.output(18, GPIO.HIGH)
-        GPIO.output(17, GPIO.LOW)
+        GPIO.output(6, GPIO.HIGH)
+        GPIO.output(5, GPIO.LOW)
         time.sleep(1)
 
 except KeyboardInterrupt:
