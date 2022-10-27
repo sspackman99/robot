@@ -7,11 +7,11 @@ import time
 
 pygame.init()
 
-SCREEN_SIZE = (500,500)
+# SCREEN_SIZE = (500,500)
 
-screen = pygame.display.set_mode(SCREEN_SIZE)
+# screen = pygame.display.set_mode(SCREEN_SIZE)
 
-pygame.display.set_caption('RoboCon 2022')
+# pygame.display.set_caption('RoboCon 2022')
 
 #Create motor class
 
@@ -96,6 +96,7 @@ while 1 < 10:
         # window close event
         if event.type == QUIT:
             if event.key == K_q:
+                print('quitting')
                 pygame.quit()
                 sys.exit()
 
@@ -134,7 +135,7 @@ while 1 < 10:
             print('going right')
             turn_right()
 
-        pygame.display.update()
+        #pygame.display.update()
 
             
 
