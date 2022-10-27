@@ -15,6 +15,7 @@ try:
         time.sleep(1)
         GPIO.output(18, GPIO.HIGH)
         GPIO.output(17, GPIO.LOW)
+        time.sleep(1)
 
 except KeyboardInterrupt:
         print("Lights stopped by User")
