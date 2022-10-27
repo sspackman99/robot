@@ -88,55 +88,55 @@ go_right = False
 
 # try: 
 ## pygame main loop
-    while True:
+while True:
 
-        # event checker
-        for event in pygame.event.get():
+    # event checker
+    for event in pygame.event.get():
 
-            # window close event
-            if event.type == QUIT:
-                #if event.key == K_q:
-                print('quitting')
-                pygame.quit()
-                GPIO.cleanup()
-                sys.exit()
+        # window close event
+        if event.type == QUIT:
+            #if event.key == K_q:
+            print('quitting')
+            pygame.quit()
+            GPIO.cleanup()
+            sys.exit()
 
-            if event.type == KEYDOWN:
-                # forward
-                if event.key == K_w:
-                    print('you pressed w')
-                    forward = True
-                # backward
-                if event.key == K_s:
-                    print('you pressed s')
-                    reverse = True
-                # turn left
-                if event.key == K_a:
-                    print('you pressed a')
-                    go_left = True
-                # turn right
-                if event.key == K_d:
-                    print('you pressed d')
-                    go_right = True
+        if event.type == KEYDOWN:
+            # forward
+            if event.key == K_w:
+                print('you pressed w')
+                forward = True
+            # backward
+            if event.key == K_s:
+                print('you pressed s')
+                reverse = True
+            # turn left
+            if event.key == K_a:
+                print('you pressed a')
+                go_left = True
+            # turn right
+            if event.key == K_d:
+                print('you pressed d')
+                go_right = True
 
-            if event.type == KEYUP:
-                forward = reverse = go_left = go_right = False
-                all_stop()
-            # This will actually make the robot work
-            if forwards:
-                print('going forward')
-                all_forward()
-            if reverse:
-                print('going back')
-                all_backward()
-            if go_left:
-                print('going left')
-                turn_left()
-            if go_right:
-                print('going right')
-                turn_right()
+        if event.type == KEYUP:
+            forward = reverse = go_left = go_right = False
+            all_stop()
+        # This will actually make the robot work
+        if forwards:
+            print('going forward')
+            all_forward()
+        if reverse:
+            print('going back')
+            all_backward()
+        if go_left:
+            print('going left')
+            turn_left()
+        if go_right:
+            print('going right')
+            turn_right()
 
-            pygame.display.update()
+        pygame.display.update()
 # except KeyboardInterrupt:
 #         print("remote control stopped by User")
 #         GPIO.cleanup()
