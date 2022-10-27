@@ -102,7 +102,7 @@ if __name__ == '__main__':
         while True:
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
-            if dist < 10:
+            if dist < 20:
                 print("turning left")
                 turn_left()
             else:
