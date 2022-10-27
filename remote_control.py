@@ -105,7 +105,7 @@ while True:
             # forward
             if event.key == K_w:
                 print('you pressed w')
-                forward = True
+                forwards = True
             # backward
             if event.key == K_s:
                 print('you pressed s')
@@ -120,7 +120,7 @@ while True:
                 go_right = True
 
         if event.type == KEYUP:
-            forward = reverse = go_left = go_right = False
+            forwards = reverse = go_left = go_right = False
             all_stop()
         # This will actually make the robot work
         if forwards:
