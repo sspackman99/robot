@@ -87,15 +87,15 @@ def all_stop():
 
 def turn_left():
     for motor in left_motors:
-        motor.backward()
-    for motor in right_motors:
         motor.forward()
+    for motor in right_motors:
+        motor.backward()
 
 def turn_right():
     for motor in left_motors:
-        motor.forward()
-    for motor in right_motors:
         motor.backward()
+    for motor in right_motors:
+        motor.forward()
  
 if __name__ == '__main__':
     try:
