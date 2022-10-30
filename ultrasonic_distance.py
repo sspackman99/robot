@@ -109,10 +109,10 @@ if __name__ == '__main__':
             if dist < 20:
                 print("turning left")
                 turn_left()
-                time.sleep(1.5)
+                #time.sleep(1.5)
             else:
                 all_forward()
-            time.sleep(.05)
+            #time.sleep(.05)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
