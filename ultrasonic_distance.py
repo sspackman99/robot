@@ -85,14 +85,17 @@ def all_backward():
 def all_stop():
     for motor in motors:
         motor.stop()
+    GPIO.output(8, GPIO.LOW)
 
 def turn_left():
+    GPIO.output(8, GPIO.LOW)
     for motor in left_motors:
         motor.forward()
     for motor in right_motors:
         motor.backward()
 
 def turn_right():
+    GPIO.output(8, GPIO.LOW)
     for motor in left_motors:
         motor.backward()
     for motor in right_motors:

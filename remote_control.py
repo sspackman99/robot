@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import pygame, sys
 from pygame.locals import *
 import time
+from threading import Thread
 
 pygame.init()
 
@@ -81,6 +82,22 @@ def turn_right():
     for motor in right_motors:
         motor.forward()
 
+def lights():
+    while True:
+        if reverse == False:
+            GPIO.output(8, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+            time.sleep(1)
+            GPIO.output(25, GPIO.HIGH)
+            GPIO.output(8, GPIO.LOW)
+            time.sleep(1)
+        else:
+            GPIO.output(8, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+
+t = Thread(target=lights)
+t.start()
+
 # direction variables
 forwards = False
 reverse = False
@@ -90,18 +107,6 @@ go_right = False
 # try: 
 ## pygame main loop
 while True:
-
-    if reverse == False:
-        GPIO.output(8, GPIO.HIGH)
-        GPIO.output(25, GPIO.LOW)
-        time.sleep(1)
-        GPIO.output(25, GPIO.HIGH)
-        GPIO.output(8, GPIO.LOW)
-        time.sleep(1)
-    else:
-        GPIO.output(8, GPIO.HIGH)
-        GPIO.output(25, GPIO.LOW)
-
     # event checker
     for event in pygame.event.get():
 
