@@ -82,6 +82,12 @@ def turn_right():
     for motor in right_motors:
         motor.forward()
 
+# direction variables
+forwards = False
+reverse = False
+go_left = False
+go_right = False
+
 def lights():
     while True:
         if reverse == False:
@@ -97,12 +103,6 @@ def lights():
 
 t = Thread(target=lights)
 t.start()
-
-# direction variables
-forwards = False
-reverse = False
-go_left = False
-go_right = False
 
 # try: 
 ## pygame main loop
