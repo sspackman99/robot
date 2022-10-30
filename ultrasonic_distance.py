@@ -30,10 +30,10 @@ GPIO.setmode(GPIO.BCM)
 #set GPIO Pins
 GPIO_TRIGGER = 16
 GPIO_ECHO = 12
-MOTOR1 = Motor(24,23)
-MOTOR2 = Motor(17,18)
-MOTOR3 = Motor(26,20)
-MOTOR4 = Motor(19,13)
+MOTOR2 = Motor(24,23)
+MOTOR1 = Motor(17,18)
+MOTOR4 = Motor(26,20)
+MOTOR3 = Motor(19,13)
 
 motors = [MOTOR1, MOTOR2, MOTOR3, MOTOR4]
 
