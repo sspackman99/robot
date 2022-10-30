@@ -4,6 +4,7 @@ import pygame, sys
 from pygame.locals import *
 import time
 from threading import Thread
+from threading import Lock
 
 pygame.init()
 
@@ -50,38 +51,41 @@ motors = [MOTOR1, MOTOR2, MOTOR3, MOTOR4]
 left_motors = [MOTOR1, MOTOR3]
 
 right_motors = [MOTOR2, MOTOR4]
+
+lock = Lock()
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
 GPIO.setup(8, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
 
 ###Directions
 
 def all_forward():
-    GPIO.output(8, GPIO.LOW)
+    #GPIO.output(8, GPIO.LOW)
     for motor in motors:
         motor.forward()
 
 def all_backward():
     for motor in motors:
         motor.backward()
-        GPIO.output(8, GPIO.HIGH)
+        #GPIO.output(8, GPIO.HIGH)
 
 def all_stop():
-    GPIO.output(8, GPIO.LOW)
+    #GPIO.output(8, GPIO.LOW)
     for motor in motors:
         motor.stop()
 
 def turn_left():
-    GPIO.output(8, GPIO.LOW)
+    #GPIO.output(8, GPIO.LOW)
     for motor in left_motors:
         motor.forward()
     for motor in right_motors:
         motor.backward()
 
 def turn_right():
-    GPIO.output(8, GPIO.LOW)
+    #GPIO.output(8, GPIO.LOW)
     for motor in left_motors:
         motor.backward()
     for motor in right_motors:
@@ -93,21 +97,23 @@ reverse = False
 go_left = False
 go_right = False
 
-# def lights():
-#     while True:
-#         if reverse == False:
-#             GPIO.output(8, GPIO.HIGH)
-#             GPIO.output(25, GPIO.LOW)
-#             time.sleep(1)
-#             GPIO.output(25, GPIO.HIGH)
-#             GPIO.output(8, GPIO.LOW)
-#             time.sleep(1)
-#         else:
-#             GPIO.output(8, GPIO.HIGH)
-#             GPIO.output(25, GPIO.LOW)
+def lights():
+    while True:
+        lock.acquire()
+        if reverse == False:
+            GPIO.output(8, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+            time.sleep(1)
+            GPIO.output(25, GPIO.HIGH)
+            GPIO.output(8, GPIO.LOW)
+            time.sleep(1)
+        else:
+            GPIO.output(8, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+        lock.release()
 
-# t = Thread(target=lights)
-# t.start()
+t = Thread(target=lights)
+t.start()
 
 # try: 
 ## pygame main loop
@@ -131,7 +137,9 @@ while True:
             # backward
             if event.key == K_s:
                 print('you pressed s')
+                lock.acquire()
                 reverse = True
+                lock.release()
             # turn left
             if event.key == K_a:
                 print('you pressed a')
@@ -142,7 +150,9 @@ while True:
                 go_right = True
 
         if event.type == KEYUP:
+            lock.acquire()
             forwards = reverse = go_left = go_right = False
+            lock.release()
             all_stop()
         # This will actually make the robot work
         if forwards:
