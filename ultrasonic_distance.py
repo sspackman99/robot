@@ -80,6 +80,7 @@ def all_forward():
 def all_backward():
     for motor in motors:
         motor.backward()
+        GPIO.output(8, GPIO.HIGH)
 
 def all_stop():
     for motor in motors:
@@ -105,6 +106,7 @@ if __name__ == '__main__':
             if dist < 20:
                 print("turning left")
                 turn_left()
+                time.sleep(1.5)
             else:
                 all_forward()
             time.sleep(.05)

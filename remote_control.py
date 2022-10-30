@@ -63,6 +63,7 @@ def all_forward():
 def all_backward():
     for motor in motors:
         motor.backward()
+        GPIO.output(8, GPIO.HIGH)
 
 def all_stop():
     for motor in motors:
@@ -89,6 +90,17 @@ go_right = False
 # try: 
 ## pygame main loop
 while True:
+
+    if reverse == False:
+        GPIO.output(8, GPIO.HIGH)
+        GPIO.output(25, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(25, GPIO.HIGH)
+        GPIO.output(8, GPIO.LOW)
+        time.sleep(1)
+    else:
+        GPIO.output(8, GPIO.HIGH)
+        GPIO.output(25, GPIO.LOW)
 
     # event checker
     for event in pygame.event.get():
