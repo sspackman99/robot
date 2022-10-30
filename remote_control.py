@@ -158,9 +158,11 @@ while True:
         if forwards:
             print('going forward')
             all_forward()
+        lock.acquire()
         if reverse:
             print('going back')
             all_backward()
+        lock.release()
         if go_left:
             print('going left')
             turn_left()
