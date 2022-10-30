@@ -54,10 +54,12 @@ right_motors = [MOTOR2, MOTOR4]
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
+GPIO.setup(8, GPIO.OUT)
 
 ###Directions
 
 def all_forward():
+    GPIO.output(8, GPIO.LOW)
     for motor in motors:
         motor.forward()
 
@@ -67,16 +69,19 @@ def all_backward():
         GPIO.output(8, GPIO.HIGH)
 
 def all_stop():
+    GPIO.output(8, GPIO.LOW)
     for motor in motors:
         motor.stop()
 
 def turn_left():
+    GPIO.output(8, GPIO.LOW)
     for motor in left_motors:
         motor.forward()
     for motor in right_motors:
         motor.backward()
 
 def turn_right():
+    GPIO.output(8, GPIO.LOW)
     for motor in left_motors:
         motor.backward()
     for motor in right_motors:
@@ -88,21 +93,21 @@ reverse = False
 go_left = False
 go_right = False
 
-def lights():
-    while True:
-        if reverse == False:
-            GPIO.output(8, GPIO.HIGH)
-            GPIO.output(25, GPIO.LOW)
-            time.sleep(1)
-            GPIO.output(25, GPIO.HIGH)
-            GPIO.output(8, GPIO.LOW)
-            time.sleep(1)
-        else:
-            GPIO.output(8, GPIO.HIGH)
-            GPIO.output(25, GPIO.LOW)
+# def lights():
+#     while True:
+#         if reverse == False:
+#             GPIO.output(8, GPIO.HIGH)
+#             GPIO.output(25, GPIO.LOW)
+#             time.sleep(1)
+#             GPIO.output(25, GPIO.HIGH)
+#             GPIO.output(8, GPIO.LOW)
+#             time.sleep(1)
+#         else:
+#             GPIO.output(8, GPIO.HIGH)
+#             GPIO.output(25, GPIO.LOW)
 
-t = Thread(target=lights)
-t.start()
+# t = Thread(target=lights)
+# t.start()
 
 # try: 
 ## pygame main loop
