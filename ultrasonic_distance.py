@@ -108,7 +108,8 @@ if __name__ == '__main__':
             print ("Measured Distance = %.1f cm" % dist)
             if dist < 20:
                 print("turning left")
-                turn_left()
+                #turn_left()
+                all_backward()
                 #time.sleep(1.5)
             else:
                 all_forward()
