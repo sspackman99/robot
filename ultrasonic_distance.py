@@ -44,6 +44,7 @@ right_motors = [MOTOR2, MOTOR4]
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
+GPIO.setup(8, GPIO.OUT)
 
  
 def distance():
